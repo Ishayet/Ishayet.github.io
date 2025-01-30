@@ -1,0 +1,200 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Interactive World Map</title>
+    
+    <link rel="stylesheet" href="assets/css/submain.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    <style>
+        /* Custom styling for the map container */
+        #map {
+            width: 100%; /* Map takes full width of its parent */
+            height: 850px; /* Set height for the map */
+            margin: 20px 0; /* Add spacing around the map */
+            border-radius: 8px; /* Optional: Rounded corners */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            
+        }
+
+        .legend {
+            background: white;
+            display: inline;
+            align-items: center;
+            gap: 8px;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            font-size: 15px;
+            line-height: 21px;
+            color: #333333;
+        }
+
+        .legend i {
+            width: 20px;
+            height: 20px;
+            float: left;
+            margin-right: 12px;
+            opacity: 1;
+        }
+
+        .legend-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .station-label {
+            font-size: 12px;
+            color: #000307;
+            text-shadow:1px 1px white, -1px 1px white, 1px -1px white, -1px -1px white ;
+            background-color: transparent;
+            border: none;
+            
+            padding: 0; /* Remove padding */
+            margin: 0; /* Remove margin */
+            box-shadow: none !important;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <h1> <strong> Service Area Analysis of Dhaka Metro Line 6</strong></h1>
+    </header>
+
+  <!-- Main Content -->
+  <section id="main">
+    <article>
+        <h2>About the Project</h2>
+        <p>As of 2025, the MRT line 6 of Dhaka has 16 stations. The map below is a service area analysis of the metro stations. Each station has 3 service areas. The largest catchment area shows a hybrid distance that is usually traversed both on foot and rickshaw (a three-wheeler that typically covers short to moderate distances). Service Area analysis is great tool for assessing service gaps and served demographic.</p>
+        <p> Explore the map by zooming and panning to different regions.</p>
+        
+        <!-- Map container -->
+        <div id="map"></div>
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+        <p>A service area analysis can be used for assessing the accessibility of certain facilities. The catchment area of the given service or facility can demonstrate the area served by it. Here I have used a network-based method for determining the service areas of MRT-6 stations. The areas have been identified by following the street network which translates to the amount of distance that can be traversed on foot.</p>
+        <p>The first catchment area has a threshold distance of 500m. If we assume a 1m/s walking speed, then everything inside this catchment is at a maximum of 8-minute walking distance.</p>
+        <p>The second catchment area has a threshold distance of 1000m. This distance can be traversed on foot, but there are high possibilities of rickshaw usage. Either way, it is still a very accessible distance for using the metro line.</p>
+        <p>The last catchment area has a threshold distance of 1500m. This is a fair amount of distance which most people will not be comfortable walking to. Especially in the hostile streets of Dhaka. But due to the reliability and trust in the metro service, people often be seen take extended trips, sometimes even beyond 1500m, to board the metro.</p>
+
+
+
+    </article>
+</section>
+
+
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+
+// Function to load GeoJSON using Axios
+function loadGeoJSON(url, options) {
+    return axios.get(url).then(response => L.geoJSON(response.data, options));
+}
+
+// Initialize the map
+    var map = L.map('map', {
+            center: [23.8, 90.40], // Map center
+            zoom: 12.5,             // Initial zoom level
+            zoomSnap: 0.9,           // Allows fractional zoom levels
+        });
+
+// Add Base map as tile layer
+    L.tileLayer('https://tile.jawg.io/jawg-light/{z}/{x}/{y}{r}.png?access-token=oqEUrpKZZI0fxLRHwv2MfG6mVGGTawTtl55zxWgchJ6Gny20ZGYPUeImMvUFtDly', {
+        minZoom: 5,
+        maxZoom: 20,
+        attribution: '© <a href="https://jawg.io" target="_blank">Jawg Maps</a> contributors'
+    }).addTo(map);
+
+// Load GeoJSON layers
+const serviceAreaPromise = loadGeoJSON('assets/GeoJson/MRT-6 SA.geojson', {
+    style: feature => ({
+        color: feature.properties.lineColor,
+        fillColor: feature.properties.fillColor,
+        weight: 0.7,
+        fillOpacity: 0.7
+    }),
+    onEachFeature: (feature, layer) => {
+        if (feature.properties && feature.properties.ToBreak) {
+            layer.bindPopup(`Cut Off Distance: ${feature.properties.ToBreak}m`);
+            layer.on('mouseover', function () { this.openPopup(); });
+            layer.on('mouseout', function () { this.closePopup(); });
+        }
+    }
+}).then(layer => layer.addTo(map));
+
+const MRTPromise = loadGeoJSON('assets/GeoJson/MRT-6 line.geojson', {
+    style: feature => ({
+        color: feature.properties.lineColor,
+        weight: 2,
+    }),
+}).then(layer => layer.addTo(map));
+
+const stationsPromise = loadGeoJSON('assets/GeoJson/MRT-6 Stations.json', {
+    pointToLayer: (feature, latlng) => {
+        return L.circleMarker(latlng, {
+            radius: 6,
+            fillColor: feature.properties.fillColor || '#00C5FF',
+            color: feature.properties.lineColor || '#004DA8',
+            weight: 1,
+            fillOpacity: 0.9
+        });
+    },
+    onEachFeature: (feature, layer) => {
+        if (feature.properties && feature.properties.Name) {
+            layer.bindTooltip(`<strong>Station:</strong> ${feature.properties.Name}`, { permanent: true, direction: 'right', offset: [14, 0], className: 'station-label' }); // Always visible label
+        }
+    }
+}).then(layer => layer.addTo(map));
+
+    // Adjust layer order
+    Promise.all([serviceAreaPromise, MRTPromise, stationsPromise]).then(([serviceAreaLayer, MRTLayer, stationsLayer]) => {
+    
+    // Ensure MRT line layer stays in the middle
+    MRTLayer.eachLayer(layer => layer.bringToFront());
+    
+    // Ensure stations are on top
+    stationsLayer.eachLayer(layer => layer.bringToFront());
+}); 
+
+    
+// Add Legend to the Map
+const legend = L.control({ position: 'topright' }); // Position the legend in the bottom right
+
+legend.onAdd = function () {
+    const div = L.DomUtil.create('div', 'info legend');
+
+    // Example legend content
+    div.innerHTML = `<div class="legend-title">MRT Line 6</div>
+<div style="display: flex; align-items: center;">
+        <i style="background: #00C5FF; border: 1px solid #004DA8; border-radius: 50%; width: 12px; height: 12px; display: inline-block;"></i> MRT-6 Station<br>
+         
+        <i style="background: #00C5FF; border: 1px solid #004DA8; width: 23px; height: 5px; margin-right: 8px;"></i> MRT-6 Alignment </div>
+
+        <div class="legend-title">Service Area Cut-off Distance</div>
+        <i style="background: #E9FFBE; border: 1px solid #70A800;"></i> 500m<br>
+        <i style="background: #FFC79E; border: 1px solid #A83800;"></i> 1000m<br>
+        <i style="background: #E3305C; border: 1px solid #73004C;"></i> 1500m<br>
+    `;
+
+    return div;
+};
+
+legend.addTo(map);    
+
+</script>
+<!-- Footer -->
+<footer id="footer">
+    <div class="inner">
+        <ul class="icons">
+            <li>&copy; All rights reserved.</li>
+        </ul>
+    </div>
+</footer>
+</body>
+</html>  

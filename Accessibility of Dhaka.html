@@ -1,0 +1,249 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Interactive World Map</title>
+    
+    <link rel="stylesheet" href="assets/css/submain.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    <style>
+        /* Custom styling for the map container */
+        #map {
+            width: 100%; /* Map takes full width of its parent */
+            height: 850px; /* Set height for the map */
+            margin: 20px 0; /* Add spacing around the map */
+            border-radius: 8px; /* Optional: Rounded corners */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+        }
+
+            .legend {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            font-size: 15px;
+            line-height: 20px;
+            color: #333333;
+        }
+
+        .legend i {
+            width: 20px;
+            height: 20px;
+            float: left;
+            margin-right: 12px;
+            opacity: 1;
+        }
+
+        .legend-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .score-label {
+            font-size: 12px;
+            color: #000307;
+            text-shadow:1px 1px white, -1px 1px white, 1px -1px white, -1px -1px white ;
+            background-color: transparent;
+            border: none;
+            
+            padding: 0; /* Remove padding */
+            margin: 0; /* Remove margin */
+            box-shadow: none !important;
+        }
+
+        .stacked-fraction {
+            display: inline-block;
+            vertical-align: middle;
+            line-height: 1.8;
+        }
+        .numerator {
+            text-align: center;
+            border-bottom: 1px solid #000307;
+            display: block;
+        }
+        .denominator {
+            text-align: center;
+            display: block;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <h1> <strong> Open Space Accessibility in Dhaka City</strong></h1>
+    </header>
+
+  <!-- Main Content -->
+  <section id="main">
+    <article>
+        <h2>Objective of this Study</h2>
+        <p>The benchmark for accessibility is an important aspect for any city. Arguably more so for a developing city like Dhaka. It is difficult to allocate open space facilities and plan out future extensions without any prior knowledge on accessibility. This research was done to assess the current accessibility to public open spaces. The interactive choropleth map below shows the accessibility of different parts of Dhaka City. A higher score depicts better accessibility.</p>
+        
+        <!-- Map container -->
+        <div id="map"></div>
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        
+            <!-- Leaflet JS -->
+            <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+            <!-- Interactive map -->
+            <script>
+                // Initialize the map
+                const map = L.map('map').setView([23.78, 90.42], 12); // Center at (20, 0) with zoom level 2
+
+                // Add OpenStreetMap tiles
+                L.tileLayer('https://tile.jawg.io/jawg-light/{z}/{x}/{y}{r}.png?access-token=oqEUrpKZZI0fxLRHwv2MfG6mVGGTawTtl55zxWgchJ6Gny20ZGYPUeImMvUFtDly', {
+                    minZoom: 10,
+                    maxZoom: 12,
+                    attribution: '© <a href="https://jawg.io" target="_blank">Jawg Maps</a> contributors'
+                }).addTo(map);
+
+
+                // Load GeoJSON with symbology
+                axios.get('assets/GeoJson/Accessibility of Dhaka.json').then(response => {
+                        L.geoJSON(response.data, {
+                            style: feature => ({
+                                color: feature.properties.lineColor || '#3388ff', // Line color from properties
+                                fillColor: feature.properties.fillColor || '#3358ff', // Fill color from properties
+                                weight: 0.7,
+                                fillOpacity: 0.8
+                            }),
+                            onEachFeature: (feature, layer) => {
+                                if (feature.properties && feature.properties.Score) {
+                                    layer.bindPopup(`Accessibility Index: ${feature.properties.Score}`);
+                                    
+                                    layer.on('mouseover', function (e) {
+                                    this.openPopup(); // Show popup on hover
+                                });
+                                layer.on('mouseout', function (e) {
+                                this.closePopup(); // Hide popup when mouse leaves
+                                });
+                                if (feature.properties && feature.properties.Name) {
+                                layer.bindTooltip(`<strong></strong> ${feature.properties.Score}`, { permanent: true, direction: 'center', offset: [0, 0], className: 'score-label' }); // Always visible label
+                                }
+                                }
+                            }
+                            
+                        }).addTo(map);
+                    }).catch(error => console.error('Error loading GeoJSON:', error));
+                    
+                        // Add a legend to the map
+                        const legend = L.control({ position: 'topright' });
+
+                        legend.onAdd = function () {
+                            const div = L.DomUtil.create('div', 'info legend');
+
+                            // Define color bins and labels (individual scores)
+                            const scores = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+                            const colors = [
+                                '#ffffcc', '#ffeda0', '#fed976', '#feb24c',
+                                '#fd8d3c', '#fc4e2a', '#e31a1c', '#b10026', '#A10020'
+                            ];
+
+                            // Add title
+                            div.innerHTML = `<div class="legend-title">Accessibility Index </div>`;
+
+                            // Add individual score-color pairs
+                            for (let i = 0; i < scores.length; i++) {
+                                div.innerHTML +=
+                                    `<i style="background:${colors[i]};"></i> ${scores[i]}<br>`;
+                            }
+
+                            return div;
+                        };
+
+                        legend.addTo(map); 
+
+            </script>
+        <br><br>
+       <p>The table below shows how the scores translate to actual walking time.</p>
+            <!-- table -->
+            <table>
+                <tbody>
+                    <th>Nearest Open Space</th>
+                    <th>Walk Time in minutes</th>
+                    <th>Accessibility Index</th>
+                </tbody>
+                <tr>
+                    <td>below 100 m</td>
+                    <td>below 2 minutes</td>
+                    <td>10</td>
+                </tr><tr>
+                    <td>100 m</td>
+                    <td>2 minutes</td>
+                    <td>9</td>
+                </tr><tr>
+                    <td>300 m</td>
+                    <td>5 minutes</td>
+                    <td>8</td>
+                </tr><tr>
+                    <td>400 m</td>
+                    <td>7 minutes</td>
+                    <td>7</td>
+                </tr><tr>
+                    <td>600 m</td>
+                    <td>10 minutes</td>
+                    <td>6</td>
+                </tr><tr>
+                    <td>900 m</td>
+                    <td>15 minutes</td>
+                    <td>5</td>
+                </tr><tr>
+                    <td>1200 m</td>
+                    <td>20 minutes</td>
+                    <td>4</td>
+                </tr><tr>
+                    <td>1500 m</td>
+                    <td>25 minutes</td>
+                    <td>3</td>
+                </tr><tr>
+                    <td>1800 m</td>
+                    <td>30 minutes</td>
+                    <td>2</td>
+                </tr><tr>
+                    <td>over 1800 m</td>
+                    <td>over 30 minutes</td>
+                    <td>1</td>
+                </tr>
+
+            </table></br>
+        
+        <h3>Measuring Process</h3>
+        <p>Road network data similar to OpenStreetMaps was used to generate a network dataset, which was then used to evaluate the accessibility. The Travel Distance from each residential block to public open space was measured via this network dataset. An Accessibility score was then assigned to the census tracts depending on how well the Travel Distance was on average.</br>
+        A decay equation was used for the scoring process. This equation made sure the score was between 1 to 10 points, ensuring fair comparison between census tracts. </p>
+            <p> Accessibility Index, A<sub>i</sub> = 
+        <span class="stacked-fraction">
+            <span class="numerator">10</span>
+            <span class="denominator">e<sup>βd[i,j]</sup></p>
+
+            <p> <b><i>i)</b>    Where, A<sub>i</sub> is the Accessibility score for a building block i; </i></br>
+                <b><i>ii)</b>   D[i,j] is the Travel Distance between open space j which is closest to the building block i; </i></br>
+                <b><i>iii)</b>  β = 0.00085 for walking distances calculated in meters. It is the exponent that controls the rate of the decay.  </i></br></p>
+            <p><i>Note that none of the census tracts scored over 8, which is why we don’t see any 9’s or 10’s in the interactive map.</i></p></br>
+     
+        <h3>Usage of Network-based Distance over Euclidean Distance</h3>
+        <p>A network-based approach mimics the actual pedestrian movement and follows the street network to measure the distance. Euclidean Distance, otherwise known as the crow-fly distance, is measured by a straight-line. Although it is simpler, the results are less precise.</p>
+        <figure>
+        <img src="images/fulls/Network Based Distance.jpg" alt="Project Image 1" style="max-width: 49%; height: auto;"/>
+        <img src="images/fulls/Euclidean Distance.jpg" alt="Project Image 1" style="max-width: 49%; height: auto;"/>
+        </figure>
+        <figcaption>Difference between Network Based Distance(left) vs Euclidean Distance (right). Depending on the road network the two methods can yield drastically different results.</figcaption>
+
+                
+
+        
+    </article>
+</section>
+</body>
+<!-- Footer -->
+<footer id="footer">
+    <div class="inner">
+        <ul class="icons">
+            <li>&copy; All rights reserved.</li>
+        </ul>
+    </div>
+</footer>
+
+</html>  

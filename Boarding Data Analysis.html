@@ -1,0 +1,105 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Boarding Data Analysis</title>
+    
+    <link rel="stylesheet" href="assets/css/submain.css" />
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <h1><strong>Boarding Data Analysis of a Public Transit</strong></h1>
+        <p></p>
+    </header>
+
+    <!-- Main Content -->
+    <section id="main">
+        <article>
+            <h1>Purpose of Analyzing Transit Ridership Data</h1>
+            <p>The boarding alighting data collected via TransitWand contains spatial data. Analyzing this data provides valuable insights about the transit system and enables its performance evaluation. Some key elements that can be analyzed are: 
+                <li>Passenger activity,</li>
+                <li>Spatial pattern recognition (Recognizing areas with high or low usage),</li>
+                <li>Discerning passenger demands, </li>
+                <li>Stoppage/ station efficiency, </li>
+                <li>Differentiate between Peak vs Off-peak performance,</li>
+                <li>Service gaps,</li>
+                <li>Revenue estimation,</li>
+                <li>Load Factor,</li>
+                <li>Transfer patterns,</li>
+                <li>Poentital areas for improvement etc.</li>
+            </br>
+           
+            <h3>Preparing Raw Data</h3>
+            <p>The collected data came in Shapefiles and csv files. Which I then processed and visualized for the purpose analysis.</p>
+            <p>The ride occupancy, travel time, operational speed and estimated revenue was generated with the data. Revenue can be estimated through Revenue Passenger Kilometer (RPK) otherwise known as the Passenger Load Unit. Load Factor for each trip was also determined.
+             These help us to understand and analyze the trends in passenger usage. It also allows us to compare between different routes and set a performance benchmark.</p>
+            <img src="images/fulls/TransitWand data.jpeg" alt="Project Image 1" style="max-width: 100%; display: flex; margin-left: auto; margin-right: auto;"/>
+            <figcaption>This is a screenshot from the app’s server. The boarding and alighting info are collected as point data.</figcaption>
+            
+            <img src="images/fulls/TWSHP.jpg" alt="Project Image 1" style="max-width: 58%; display: inline; margin-left: auto; margin-right: auto;"/>
+            <img src="images/fulls/TWCSV.jpg" alt="Project Image 1" style="max-width: 41%; display: inline; margin-left: auto; margin-right: auto;"/>
+            <figcaption>This data can then be exported as Shapefiles and csv files.</figcaption>
+            </br>
+            
+            
+            <h1>Data Visualization</h1>
+            <p>Since we don’t have properly utilized bus stops, individual stoppage performances are hard to assess. So, the surveyed route has been split into multiple segments. The demands for each segment are then visualized.</p>
+            </br>
+            
+            <img src="images/fulls/Passenger Volume Map Route 21.jpg" alt="Project Image 1" style="max-width: 100%; border: 1px solid rgb(204, 203, 203);"/>
+            <figcaption> Width and color of the segments indicate the Passenger Load. The Passenger Load is a metric that indicates the volume of passengers that have been transported. Pie charts indicate the total boarding and alighting on each segment. </figcaption>
+        </br>
+            <h3> Visualizing Boarding-Alighting with Pie Charts</h3>
+            <img src="images/fulls/Activity Eastbound (Aggregated).png" alt="Project Image 1" style="max-width: 49%; display: inline; margin-left: auto; margin-right: auto;"/> 
+            <img src="images/fulls/Activity Westbound (Aggregated).png" alt="Project Image 1" style="max-width: 49%; display: inline; margin-left: auto; margin-right: auto;"/>
+            <figcaption>These maps also show the boarding alighting with pie charts but the eastbound and westbound trips are separately visualized. The relative size of the charts indicate the total amount of passenger engagement. </figcaption>
+        </br>
+        <h3>Heatmaps</h3>
+        <img src="images/fulls/Eastbound Boarding.jpg" alt="Project Image 1" style="max-width: 49%; height: auto;"/>
+        <img src="images/fulls/Eastbound Alighting.jpg" alt="Project Image 1" style="max-width: 49%; height: auto;"/></br>
+        <img src="images/fulls/Westbound Boarding.jpg" alt="Project Image 1" style="max-width: 49%; height: auto;"/>
+        <img src="images/fulls/Westbound Alighting.jpg" alt="Project Image 1" style="max-width: 49%; height: auto;"/></br>
+        <figcaption>Heatmaps also depict activity patterns. These were generated separately for each trip. Higher passenger counts are shown in the heatmap as darker and denser patches. </figcaption>
+         
+    </br>
+           <h3>Occupancy Curve</h3>
+            <p>I also prepared Occupancy curves for all 4 individual trips. Occupancy curves are a great way to see how crowded or empty the vehicles run. In conjunction with the Passenger Load Factor and RPK (Revenue Passenger Kilometer) it gives a great insight on the performance of a transit line.</p> 
+    </br>
+    <h4>Occupancy curve of Eastbound Trip</h4>
+        <img src="images/fulls/Occupancy E9.jpg" alt="Project Image 1" style="max-width: 49%; height: auto; border: 1px solid rgb(204, 203, 203);"/>
+        <img src="images/fulls/Occupancy E12.jpg" alt="Project Image 1" style="max-width: 49%; height: auto; border: 1px solid rgb(204, 203, 203);"/></br>
+        <img src="images/fulls/Occupancy East.jpg" alt="Project Image 1" style="max-width: 100%; height: auto; border: 1px solid rgb(204, 203, 203);"/> </br>
+    </br>
+    <h4>Occupancy curve of Westbound Trip</h4>
+        <img src="images/fulls/Occupancy W9.jpg" alt="Project Image 1" style="max-width: 49%; height: auto; border: 1px solid rgb(204, 203, 203);"/>
+        <img src="images/fulls/Occupancy W12.jpg" alt="Project Image 1" style="max-width: 49%; height: auto; border: 1px solid rgb(204, 203, 203);"/></br>
+        <img src="images/fulls/Occupancy West.jpg" alt="Project Image 1" style="max-width: 100%; height: auto; border: 1px solid rgb(204, 203, 203);"/> </br>
+        
+        <figcaption>The disparity between peak and off-peak hours are clearly visible from the occupancy curves. </figcaption>
+    </br> 
+        <img src="images/fulls/Load Factor.jpg" alt="Project Image 1" style="max-width: 80%; display: flex; margin-left: auto; margin-right: auto; border: 1px solid rgb(204, 203, 203); "/> </br>
+        <figcaption>A higher Load Factor indicates that the proportion of available capacity is being utilized properly, while a lower Load Factor indicates underutilization. The efficacy of the line drops drastically as the Load Factor decreases in off-peak hours. Under such circumstances readjustments in scheduling can be done to maintain efficacy.</figcaption>
+</br>
+        
+<h3>Ending Note</h3>
+    <p>Such data are exremely valuable for transport planners. Having spatial boarding data enables us to see places with high demands, gaps in the services and station efficacy. Time and places of high demands can be sorted out. Load Factor and Occupancy curves are a great way of detecting inefficacies in a transit line. 
+    Proper collection and utilization of such data have great potential to drastically increase the efficacy of Dhaka's transit system. </p>
+    
+    
+    
+            
+
+
+        </article>
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="inner">
+            <ul class="icons">
+                <li>&copy; All rights reserved.</li>
+            </ul>
+        </div>
+    </footer>
+</body>
+</html>

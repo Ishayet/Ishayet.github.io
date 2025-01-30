@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>DBSCAN</title>
+    
+    <link rel="stylesheet" href="assets/css/submain.css" />
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <h1><strong>Allocation of Bus Stoppages using Density Based Clustering (DBSCAN)</strong></h1>
+        <p></p>
+    </header>
+
+    <!-- Main Content -->
+    <section id="main">
+        <article>
+            <h2><b>Allocation of Bus Stoppages using Density Based Clustering</b></h2>
+        
+            <p><i>Using the data collected via TransitWand app, I analyzed the passenger engagement pattern and allocated some bus stops for the surveyed bus route. This process was done using ArcGIS pro’s Density Based Spatial Clustering of Applications with Noise (DBSCAN). </i></p>
+        </br> 
+            <h2>Objective</h2>
+            <p>The data collected via TransitWand comes in geospatial format, enabling spatial analysis and visualization.  Boarding data with map coordinates reflect passenger preferences so this information can be utilized for allocation and even reallocation of bus stoppages.</p>
+            <img src="images/fulls/stop vs psngr.jpg" alt="Project Image 1" style="max-width: 90%; display: flex; margin-left: auto; margin-right: auto;"/>
+            </br>
+            <p>It should be noted that the surveyed route already had several dedicated bus stops. So, I expected the passenger engagements to be a little biased. However, we still saw an abundance of disobedient passenger activities. Passengers ultimately gravitate towards some preferred spots. Figuring out these preferred locations can be a great insight for transport engineers. In Dhaka we don’t get many opportunities to work with data of such quality. This is why spatial data of this sort is so valuable.</p>
+            </br>
+            <h2>Analysis</h2>
+            <p>The boarding alighting data contains the coordinates of embarked and disembarked passengers in addition to the halting points of the vehicle. The timestamp for each action is also provided. The surveyed route (Route no. 21 of Dhaka Nagar Paribahan) runs in the east-west direction. Peak hour and off-peak hour data were collected for both eastbound and westbound directions, giving us 4 trip data in total.</p>
+            <img src="images/fulls/DBSCAN + spider lines.jpg" alt="Project Image 1" style="max-width: 90%; display: flex; margin-left: auto; margin-right: auto;"/>
+        <figcaption>The green dots (cluster centroids) are my analyzed stoppages. It is noteworthy to mention that these stops are not that different from the dedicated stoppages. This is as expected as the existing stoppages already influence the passenger movement to some degree. If anything this acts as an esurity that the clustering process actually resembles passenger preferences. We ideally also don't want to completely rehaul all of the stoppages.</figcaption>
+        </br>
+            <p>This point data is hard to visualize and might seem all over the place to the naked eye. So, a clustering method was used to figure out some hot spots. I used a Density Based Spatial Clustering method, otherwise known as DBSCAN from ArcGIS Pro. The centroids of the clusters were determined by the Mean Center tool. These centroids are our newly determined bus stoppages.</p>
+        
+            <img src="images/thumbs/DBSCAN.jpg" alt="Project Image 1" style="max-width: 90%; display: flex; margin-left: auto; margin-right: auto;"/>
+        </br>   
+            <p>I also determined the service areas of the stoppages. These areas represent the reach of service. Such kind of analysis is great at showing service gaps.</p>
+    </br>        
+        <h2>Ending Note</h2>
+    
+        <p>This method gives us a general idea about user preference. Such insights are beneficial for allocating facilities but is certainly not the end all be all.</p>
+        <p>For this small analysis I aggregated the data for both directions (eastbound & westbound). To get an even better idea this data could’ve been aggregated direction wise and then analyzed. This method would prove to be even more useful on routes that are not influenced by preexisting stoppages. Untampered passenger interactions might suggest better spots for consideration.</p>
+            
+            
+        </article>
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="inner">
+            <ul class="icons">
+                <li>&copy; All rights reserved.</li>
+            </ul>
+        </div>
+    </footer>
+</body>
+</html>

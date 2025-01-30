@@ -1,0 +1,77 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Set Coverage Demo</title>    
+    <link rel="stylesheet" href="assets/css/submain.css" />
+    
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <h1><strong>Set Covering Method (Demo)</strong></h1>
+        <p></p>
+    </header>
+
+    <!-- Main Content -->
+    <section id="main">
+        <article>
+            <h2><b>Solving Bus Line Problem with Set Covering Method (Demo)</b></h2>
+            <p>In my project “Optimized Route Investigation Survey” I have talked about a solver that I used for finding out the minimum number of sites for the survey. To better understand how it works I’m showing a small demo as an example. </p>
+            
+            <img src="images/fulls/Set Coverage img/Picture1.jpg" alt="" style="max-width: 100%;  display: flex;"/></br>
+            <p>Suppose I have 9 routes in total (Routes A1, A2, A5 etc.) and I’ve primarily selected 10 locations as my survey spots (locations A to J). The routes are placed on cell array A3:A11 and the locations are on cell array D2:M2. The routes that run along these locations are arranged in order, so that they match their respective rows. The Column named “Instances 1st selection” are showing how many times the respective route has been repeated when all 10 locations are combined. We need to make sure each and every one gets repeated once. [ If we recall my main survey project, this is where I chose the 32 locations for the first selection.] The Column named “Instances Optimized” will show how many times a route repeats when the solver finds out the minimum number of locations. It is zero for the moment as we haven’t selected anything yet.</p>
+        </br>
+            <h3><b><i>Now I’ll explain the entire process in 5 steps.</b></i></h3>
+            <p><b><i>Step 1:</i></b> I assign the following SUMPRODUCT functions in the cells of “Optimized” column. </p>
+            
+            <img src="images/fulls/Set Coverage img/Picture2.jpg" alt="" style="max-width: 100%;  display: flex;"/></br>
+            <img src="images/fulls/Set Coverage img/Picture3.jpg" alt="" style="max-width: 100%;  display: flex;"/>
+            <figcaption>This function returns the number of times a route is repeated due to the site selection. Here I selected locations C and D for example, the Optimized column returns the number of times each route is seen. Note that we still miss out route A13.</figcaption>
+            </br>
+            <p> Now I go to Excel’s menu bar, select “Data” and then click on “Solver”. The “Solver Parameters” window will appear.</p>
+            
+            <img src="images/fulls/Set Coverage img/Picture4.jpg" alt="" style="max-width: 100%;  display: flex; margin-left: auto; margin-right: auto;"/></br>
+            
+            <p><b><i>Step 2:</i></b> On the “Solver Parameters” cell array D2:M2 will be set as the changing variable. After running the Solver, these will turn 1 or 0, indicating selection or rejection of a site respectively.</p>
+            <p><b><i>Step 3:</i></b> Next, I assign cell E13 as the objective and set it to “Min” as I want to select the minimum number of survey spots that has all 9 routes present. Cell E13 contains the summation of selected locations from array D2:M2.</p>
+            <p><b><i>Step 4:</i></b> Now we need to set the constraints. Each route must repeat at least once. So, for the first condition, the cell array C3:C11 needs to be greater than or equal to zero. The second condition represents that the changing variable cells (D2:M2) must be in binary to indicate selection or rejection of a site. The solving method must be “Simplex LP”.</p>
+            <p><b><i>Step 5:</i></b> Hitting “Solve” the solver gives us 3 locations that suffice our needs. Note that the overlap counts are shown in “Instances Optimized” column and each location is present at least once.</p>
+            
+            <img src="images/fulls/Set Coverage img/Picture5.jpg" alt="" style="max-width: 100%;  display: flex;"/></br>
+            
+            <p>With this the selection process is done. With the help of solver we found out the minimum number of survey spots needed to cover every Route.</p></br>
+            
+            <h3>Additional Condition for Maximum Coverage</h3>
+            <p>Note that I've also included a cell which shows the amount of repetitions we see while selecting our sites. We can go one step further if we want and find out the combination of locations that yields maximum repetitions. </p>
+            <p>First let’s create another cell that is the summation of all optimized instances. Now let's go back to Solver Parameters and select cell E14 as the Objective cell. We would also like to set it to “Max” as our objective is to find the maximum number of repetitions. One additional constraint will be added that indicates the number of locations we want. Since we already know that 3 locations are sufficient, we define cell E13=3. </p>
+            
+            <img src="images/fulls/Set Coverage img/Picture6.jpg" alt="" style="max-width: 100%;  display: flex; margin-left: auto; margin-right: auto;"/></br>
+            
+            <p>This time the solver gives us a different combination. If we compare with the previous solve, we see that the repetitions increased from 13 to 15. Thus, we have successfully figured out the minimum number of survey sites with the maximum coverage.</p>
+            
+            <img src="images/fulls/Set Coverage img/Picture7.jpg" alt="" style="max-width: 100%;  display: flex;"/></br>
+
+            <h3>Ending Note</h3>
+            <p>The site selection for <a href="Route Investigation.html">Optimized Route Investigation </a> was done in a similar process. Excel’s Solver has a limit of 200 decision variables, and I had almost 400 data to work with. So I had to rely on a third-party extension named <a href="https://opensolver.org/">Open Solver</a>.</p>
+            
+
+
+
+
+
+
+
+
+        </article>
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="inner">
+            <ul class="icons">
+                <li>&copy; All rights reserved.</li>
+            </ul>
+        </div>
+    </footer>
+</body>
+</html>
