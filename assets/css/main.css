@@ -98,12 +98,11 @@ input, select, textarea {
 		}
 
 	body, input, select, textarea {
-		color: #5e5e5e;
+		color: #a2a2a2;
 		font-family: "Source Sans Pro", Helvetica, sans-serif;
-		font-size: 14pt;
+		font-size: 16pt;
 		font-weight: 400;
 		line-height: 1.75em;
-		text-align: justify;
 	}
 
 	a {
@@ -122,16 +121,11 @@ input, select, textarea {
 			text-decoration: none;
 		}
 
-	strong {
+	strong, b {
 		color: #787878;
 		font-weight: 400;
 	}
-	
-	b {
-		color: #1b1b1b;
-		font-weight: 600;
-	
-	}
+
 	em, i {
 		font-style: italic;
 	}
@@ -141,7 +135,7 @@ input, select, textarea {
 	}
 
 	h1, h2, h3, h4, h5, h6 {
-		color: #3b3b3b;
+		color: #787878;
 		font-weight: 400;
 		line-height: 1em;
 		margin: 0 0 1em 0;
@@ -159,7 +153,7 @@ input, select, textarea {
 
 	h2 {
 		font-size: 1.5em;
-		line-height: 0em;
+		line-height: 1.5em;
 	}
 
 	h3 {
@@ -1771,7 +1765,7 @@ input, select, textarea {
 	}
 
 	header p {
-		color: #464646;
+		color: #b2b2b2;
 		position: relative;
 		margin: 0 0 1.5em 0;
 	}
@@ -1797,7 +1791,7 @@ input, select, textarea {
 	}
 
 	header.major h2 {
-		font-size: 2.5em;
+		font-size: 2em;
 	}
 
 /* Form */
@@ -2044,8 +2038,8 @@ input, select, textarea {
 /* Image */
 
 	.image {
-		border-radius: 0.55em;
-		border: 0.1px solid #8b8a8a;
+		border-radius: 0.35em;
+		border: 0;
 		display: inline-block;
 		position: relative;
 	}
@@ -2056,12 +2050,12 @@ input, select, textarea {
 			-ms-transition: opacity 0.2s ease-in-out;
 			transition: opacity 0.2s ease-in-out;
 			background: url("images/overlay.png");
-			border-radius: 0.45em;
+			border-radius: 0.35em;
 			content: '';
 			display: block;
 			height: 100%;
 			left: 0;
-			opacity: 0;
+			opacity: 0.2;
 			position: absolute;
 			top: 0;
 			width: 100%;
@@ -2076,7 +2070,7 @@ input, select, textarea {
 				-webkit-transition: opacity 0.2s ease-in-out;
 				-ms-transition: opacity 0.2s ease-in-out;
 				transition: opacity 0.2s ease-in-out;
-				border-radius: 0.45em;
+				border-radius: 0.35em;
 				border: solid 3px rgba(255, 255, 255, 0.5);
 				color: #fff;
 				content: 'View';
@@ -2105,7 +2099,7 @@ input, select, textarea {
 			}
 
 		.image img {
-			border-radius: 0.45em;
+			border-radius: 0.35em;
 			display: block;
 		}
 
@@ -2380,7 +2374,7 @@ input, select, textarea {
 	}
 
 		table tbody tr {
-			border: solid 1px #220202;
+			border: solid 1px #efefef;
 			border-left: 0;
 			border-right: 0;
 		}
@@ -2398,7 +2392,7 @@ input, select, textarea {
 			font-size: 0.9em;
 			font-weight: 400;
 			padding: 0 0.75em 0.75em 0.75em;
-			text-align: center;
+			text-align: left;
 		}
 
 		table thead {
@@ -2610,7 +2604,7 @@ input, select, textarea {
 		position: fixed;
 		text-align: right;
 		top: 0;
-		width: 25%;
+		width: 27%;
 	}
 
 		#header > * {
@@ -2635,19 +2629,18 @@ input, select, textarea {
 
 		#header h2, #header h3, #header h4, #header h5, #header h6 {
 			color: #ffffff;
-			line-height: 0em;
 		}
 
 		#header h1 {
-			color: rgba(255, 255, 255, 0.527);
-			font-size: 1.4em;
+			color: rgba(255, 255, 255, 0.5);
+			font-size: 1.35em;
 			line-height: 1.75em;
 			margin: 0;
 		}
 
 		#header .image.avatar {
 			margin: 0 0 1em 0;
-			width: 5.5em;
+			width: 6.25em;
 		}
 
 /* Footer */
@@ -2689,10 +2682,10 @@ input, select, textarea {
 /* Main */
 
 	#main {
-		margin-left: 25%;
-		max-width: 72em;
+		margin-left: 28%;
+		max-width: 54em;
 		padding: 8em 4em 4em 4em;
-		width: calc(100% - 25%);
+		width: calc(100% - 27%);
 	}
 
 		#main > section {
