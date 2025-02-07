@@ -77,8 +77,11 @@
   <!-- Main Content -->
   <section id="main">
     <article>
-        <h2>Objective of this Study</h2>
-        <p>The benchmark for accessibility is an important aspect for any city. Arguably more so for a developing city like Dhaka. It is difficult to allocate open space facilities and plan out future extensions without any prior knowledge on accessibility. This research was done to assess the current accessibility to public open spaces. The interactive choropleth map below shows the accessibility of different parts of Dhaka City. A higher score depicts better accessibility.</p>
+        <h2>About this Study</h2>
+        <p>This study was done to assess the current accessibility to public open spaces in Dhaka city.</p>
+          
+        <p>The interactive map below shows the accessibility of different regions of the City. Explore the map by zooming and panning to different regions.</p>
+        <p><i>(Higher score depicts better accessibility.)</i></p>
         
         <!-- Map container -->
         <div id="map"></div>
@@ -95,8 +98,8 @@
 
                 // Add OpenStreetMap tiles
                 L.tileLayer('https://tile.jawg.io/jawg-light/{z}/{x}/{y}{r}.png?access-token=oqEUrpKZZI0fxLRHwv2MfG6mVGGTawTtl55zxWgchJ6Gny20ZGYPUeImMvUFtDly', {
-                    minZoom: 10,
-                    maxZoom: 12,
+                    minZoom: 12,
+                    maxZoom: 14,
                     attribution: '© <a href="https://jawg.io" target="_blank">Jawg Maps</a> contributors'
                 }).addTo(map);
 
@@ -210,10 +213,10 @@
 
             </table></br>
         
-        <h3>Measuring Process</h3>
-        <p>Road network data similar to OpenStreetMaps was used to generate a network dataset, which was then used to evaluate the accessibility. The Travel Distance from each residential block to public open space was measured via this network dataset. An Accessibility score was then assigned to the census tracts depending on how well the Travel Distance was on average.</br>
+        <h2>Evaluation Process</h2>
+        <p>Road network data similar to OpenStreetMaps was used to generate a network dataset, which was then used for accessibility evaluation. The travel distance from each residential block to public open space was measured via ArcGIS's network analyst extension. The network analysis utilizes the network dataset to determine the walkable distance of a closest open space for each residential block (This method is also known as a Network-Based Distance measurement). An <i>Accessibility Index</i> score was then assigned to the census tracts depending on the average travel distance.</br>
         A decay equation was used for the scoring process. This equation made sure the score was between 1 to 10 points, ensuring fair comparison between census tracts. </p>
-            <p> Accessibility Index, A<sub>i</sub> = 
+            <p><i> Accessibility Index</i>,  A<sub>i</sub> = 
         <span class="stacked-fraction">
             <span class="numerator">10</span>
             <span class="denominator">e<sup>βd[i,j]</sup></p>
@@ -223,8 +226,8 @@
                 <b><i>iii)</b>  β = 0.00085 for walking distances calculated in meters. It is the exponent that controls the rate of the decay.  </i></br></p>
             <p><i>Note that none of the census tracts scored over 8, which is why we don’t see any 9’s or 10’s in the interactive map.</i></p></br>
      
-        <h3>Usage of Network-based Distance over Euclidean Distance</h3>
-        <p>A network-based approach mimics the actual pedestrian movement and follows the street network to measure the distance. Euclidean Distance, otherwise known as the crow-fly distance, is measured by a straight-line. Although it is simpler, the results are less precise.</p>
+        <h3>Usage of Network-Based Distance over Euclidean Distance</h3>
+        <p>A <i>Network-Based</i> method was used for determining the travel distance. A <i>Network-Based</i> approach mimics the actual pedestrian movement and follows the street network to measure the distance. Euclidean Distance, otherwise known as the crow-fly distance, is measured by a straight-line. Although it is simpler, the results are less precise.</p>
         <figure>
         <img src="images/fulls/Network Based Distance.jpg" alt="Project Image 1" style="max-width: 49%; height: auto;"/>
         <img src="images/fulls/Euclidean Distance.jpg" alt="Project Image 1" style="max-width: 49%; height: auto;"/>
@@ -241,7 +244,7 @@
 <footer id="footer">
     <div class="inner">
         <ul class="icons">
-            <li>&copy; All rights reserved.</li>
+            <li>&copy; Ishayet</li>
         </ul>
     </div>
 </footer>

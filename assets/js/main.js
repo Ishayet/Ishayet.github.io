@@ -96,22 +96,26 @@
 	// Main Sections: Two.
 
 		// Lightbox gallery.
-			$window.off('load', function() {
-
-				$('#two').poptrox({
-					caption: function($a) { return $a.next('h3').text(); },
-					overlayColor: '#2c2c2c',
-					overlayOpacity: 0.85,
-					popupCloserText: '',
-					popupLoaderText: '',
-					selector: '.work-item a.image',
-					usePopupCaption: true,
-					usePopupDefaultStyling: false,
-					usePopupEasyClose: false,
-					usePopupNav: true,
-					windowMargin: (breakpoints.active('<=small') ? 0 : 50)
-				});
-
+		$window.on('load', function() {
+			$('#main').poptrox({
+				caption: function($img) { 
+					let customTitle = $img.closest('a').attr('data-title');  
+					let figCaption = $img.next('figcaption').text();
+					console.log("Custom Title:", customTitle, " | Figcaption:", figCaption);
+					return customTitle || figCaption; 
+				},
+				overlayColor: '#2c2c2c',
+				overlayOpacity: 0.85,
+				popupCloserText: '',
+				popupLoaderText: '',
+				selector: 'a:has(img)',
+				usePopupCaption: true,
+				usePopupDefaultStyling: false,
+				usePopupEasyClose: false,
+				usePopupNav: true,
+				windowMargin: (breakpoints.active('<=small') ? 0 : 50)
 			});
+		});
+		
 
 })(jQuery);

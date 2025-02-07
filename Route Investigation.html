@@ -14,50 +14,60 @@
     </header>
 
     <!-- Main Content -->
+    
     <section id="main">
         <article>
             <h3>Background</h3>
-            <p><i>I developed this preparatory survey to determine all operational bus routes in my city. The survey is very time and cost-efficient and is incredibly helpful in a third world setting where GTFS data is nonexistent.</i></p>
+            <p>I was part of a government project related to Dhaka’s Public Transit. Our project had plans to conduct broadscale boarding alighting surveys. So, I intended to do some preparatory survey planning. However, the budget and the time frame could not be estimated due to the lack of information. The number of surveyors, survey frequency, time frame, and budget were all reliant on one key information, the number of operational Bus Routes. I devised this survey to gather information on the bus lines in the most time and cost-effective way.</p> 
             </br>
-            <h2>Purpose of this Survey</h2>
-            <p> This survey was designed to investigate and create a complete database of all active bus services in Dhaka. Currently we don't have the list. So, I wanted to compile every possible route ever recorded (be it operational or not). Now if I can check each and every one of these routes for activity I am bound to find out all operational route. Basically I'm back tracking my way to ensure every possibility. </p>
-            <p>   I was part of a government project related to Dhaka’s Public Transit. Our project had plans to conduct broadscale boarding alighting surveys. So, I intended to do some preparatory survey planning. However, the budget and the time frame could not be estimated due to the lack of information. The number of surveyors, survey frequency, time frame, and budget were all reliant on one key information, the number of operational Bus Routes. I devised this survey to gather information on the bus lines in the most time and cost-effective way.</p> </br>
-
-
-
-
-            <h3>Core concept</h3>
+            <h2>Objective of the Survey</h2>
+            <p> The number of operational Routes and Bus Services that are operational in Dhaka is unknown. This survey was designed to investigate and create a complete database of all active bus services in Dhaka. </p>
+            </br>
+            <h2>Core concept</h2>
             <p>The concept of this survey is simple. It can be broken down into two parts, the investigation survey itself and the optimization employed for site selection. The optimization is done to select the minimum number of survey sites that give the maximum amount of information.</p>
 
             <i><b>Route Investigation:</b></i> Different spots will be surveyed individually and every single operating bus service seen there will be recorded. That data will then be compiled, which will give us a list of active bus operators. Surveyors will also take ample pictures of the buses, which will provide additional information. </p>
             
             
-            <img src="images/fulls/ORS 1.jpg" alt="Project Image 1"style="max-width: 100%; display: flex; margin-left: auto; margin-right: auto;" /> </br>
+            <img src="images/fulls/ORS 1.jpg" alt="Project Image 1"style="max-width: 100%; display: flex; margin-left: auto; margin-right: auto; border: 1px solid rgb(204, 203, 203);" /> </br>
             
-            <i><b>Optimization:</b></i> Selecting arbitrary sites and hoping to cover every possible route is neither optimal nor time efficient. This is where the optimization comes into play. By applying a Set Covering method, a minimum number of survey points can be selected that provides maximum coverage. </p>
+            <i><b>Optimization:</b></i> Selecting arbitrary sites and hoping to cover every possible route is neither optimal nor time efficient. This is where the optimization comes into play. By applying a Set Covering method, a minimum number of survey points can be selected that provides maximum coverage. Excel's Solver can be used for this process. I'll be using a third party extension called <a href="https://opensolver.org/">Open Solver</a> because the amount of data I'm working with exceeds Excel's limit of 200 variables.</p>
         </br>
-            <h3>Site Selection using a Set Covering Method</h3>
+            <h2>Site Selection Process</h2>
             <p>According to governmental data (BRTA – Bangladesh Road Transport Authority), a total of 388 routes have been permitted in Dhaka up until 2024. This list supposedly includes every single bus route that has ever existed. With this assumption in mind, we want to select the minimum number of locations that cover all of these routes. Now if we survey those, we are bound to get a complete picture on bus activity.</p>
-            <p>I select a large number of spots for my first selection and make sure every route gets repeated at least once. If these locations were to be surveyed, each operational route should be seen at least once.</p>
-            <p>GIS aided in this selection process. I had collected shapefiles for the 388 permitted bus routes. These are not accurate, but they provide enough data for my purpose. From GIS the number of routes running along a given location can be found.</p>
+        </br>
+            <h3>First Selection</h3>
+            <p>For the First Selection some junctiones can be roughly selected throughout the entire city. But it is absolutely necessary that these points cover each route at least once. They should also be well scattered throughout the city. Other factors like ease of surveying, safety and surveyor preference should also be considered.</p>
+            <p>GIS aided in this selection process. I had collected shapefiles for all 388 permitted bus routes. These are not accurate, but they provide enough data for our purpose. From GIS the names and numbers of routes running along a given location can be found.</p>
             
-            <img src="images/fulls/ORS 2.jpg" alt="Project Image 2"style="max-width: 100%; display: flex; margin-left: auto; margin-right: auto;" /> </br>
-            <figcaption> </figcaption>
-            <img src="images/fulls/ORS 3.jpg" alt="Project Image 3" style="max-width: 100%; display: flex; margin-left: auto; margin-right: auto;"/> 
-            <figcaption>This screenshot is an example of how I extracted the necessary data for each location. It would be an arduous process to determine the route names manually. </figcaption>
-            </br>
-            <p>By extracting data from GIS, I created a spreadsheet with all the routes on a column. Then I arranged all the spots and the routes that run along them in a corresponding manner (see the figure below). This arrangement made it possible to run the optimization via Set Covering method. To keep things simple, I have not explained how the method works. But I have provided a detailed explanation about the method in a small demo 
+            <img src="images/fulls/ORS 2.jpg" alt="Project Image 2"style="max-width: 90%; display: flex; margin-left: auto; margin-right: auto; border: 1px solid rgb(204, 203, 203);" /> 
+            <figcaption>Visualizing the route density for each junction.</figcaption>
+        </br>
+            <img src="images/fulls/ORS 3.jpg" alt="Project Image 3" style="max-width: 90%; display: flex; margin-left: auto; margin-right: auto; border: 1px solid rgb(204, 203, 203);"/> 
+            <figcaption>Extraction process. This would’ve been extremely arduous if done manually.</figcaption>
+        </br>
+            
+            <p>With the extracted data I created a spreadsheet by arranging the spots and routes in a corresponding manner (see the figure below). This arrangement made it possible to run the optimization (Set Covering method) via <a href="https://opensolver.org/">OpenSolver</a>. To keep things simple, I have not explained how the method works. But I have provided a detailed explanation about the method in a small demo 
                <a href="Set Coverage Demo.html"> here. </a></p>
             
-            <img src="images/fulls/ORS 4 Solver Spreadsheet.jpg" alt="Project Image 4"style="max-width: 100%; display: ; margin-left: auto; margin-right: auto;" /> </br>
+               <a href="images/fulls/ORS 4 Solver Spreadsheet.jpg"><img src="images/fulls/ORS 4 Solver Spreadsheet.jpg" alt="Project Image 4"style="max-width: 100%; display: ; margin-left: auto; margin-right: auto;" /></a>
+            <figcaption> I can also detect missing routes when the spreadsheet is arranged in this manner. The two columns named "Instances" show the times a route is being repeated. </figcaption>
+            <img src="images/fulls/Repeats.jpg" alt="Project Image 4"style="max-width: 80%; display: flex ; margin-left: auto; margin-right: auto;" />
+            <figcaption>The highlighted column shows the repetitions by the first selection. If any route is absent, the cells light up red. The next column indicates the number of repetitions we get if we take the solved locations.</figcaption>
+        </br>
+            <p>In my case I selected 32 individual spots as my first selection. Every one of the 388 permitted routes had run along these 32 sites at least once.
+            I also added another condition on the solver that made sure the combination of locations with the maximum amount of repetition was selected.</p>
+            </br>
+            <h3>Final Selection (Solving for Minimum Number of Locations)</h3>
+            <p>The optimization selected 14 spots out of the 32 as the final choice. It also made sure that this combination of locations had the maximum number of repetitions. (The chosen locations can be seen with green highlights. Note that the cells are also populated with 1’s or 0’s, indicating selection or rejection.)</p>
+
+            <img src="images/fulls/Solver_solution.jpg" alt="Project Image 3" style="max-width: 90%; display: flex; margin-left: auto; margin-right: auto; border: 1px solid rgb(204, 203, 203);"/> </br> 
             
-            <p>In my case I selected 32 individual spots as my first selection. Every one of the 388 permitted routes had run along these 32 sites at least once.</p>
-            <p>I also added another condition on the solver that made sure the combination of locations with the maximum amount of repetition was selected.</p>
-            <p>The optimization selected 14 spots out of the 32 as the final choice. It also made sure that this combination of locations had the maximum number of repetitions. (The chosen locations can be seen with green highlights in the figure above. Note that the cells are also populated with 1’s or 0’s, indicating selection or rejection in binary.)</p>
+            
             <p>All there is to do now is conduct the Route Investigation survey and collate data. The compilation of all the names and numbers of routes should be the actual number of active bus services in Dhaka. The pictures taken during the survey will provide additional information such as the names of services and route alignment.</p>
             </br>
             <h3> Ending Note</h3>
-            <p>This survey is meant to be conducted in a very short time span as a preparatory survey. The manpower needed is also very small, and individual sites only need to be surveyed for at most 2 hours. It is recommended to do this survey before commencing broadscale surveys.</p>
+            <p>This survey is meant to be conducted in a very short time span as a preparatory survey. The manpower needed is also very small, and individual sites only need to be surveyed for at most 2 hours. I recommend conducting this before commencing any broadscale surveys.</p>
             <p></p>
             <p></p>
 
@@ -71,9 +81,15 @@
     <footer id="footer">
         <div class="inner">
             <ul class="icons">
-                <li>&copy; All rights reserved.</li>
+                <li>&copy; Ishayet</li>
             </ul>
         </div>
     </footer>
+    <script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.poptrox.min.js"></script>
+	<script src="assets/js/browser.min.js"></script>
+	<script src="assets/js/breakpoints.min.js"></script>
+	<script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
 </body>
 </html>
