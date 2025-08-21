@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Interactive World Map</title>
+    
+    <link rel="stylesheet" href="assets/css/submain.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <h1> <strong> Vehicle Detection and Counting</strong></h1>
+    </header>
+
+  <!-- Main Content -->
+  <section id="main">
+    <article>
+        <h2><b>Counting vehicles using Yolo11, OpenCV & ByteTrack</b></h2>
+        <br>
+        <div style= "display: flex; justify-content: center;">
+            <video controls loop style="max-width: 90%;">
+            <source src="videos/demo.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+            </video>
+        </div>
+        <br>
+        <p>A snippet of the vehicle detection, tracking, and counting process. I have assigned a distinct color to each of the 7 vehicle classes. Individual vehicle counts are displayed at the top-left of the frame. Tracking is handled by ByteTrack, which is incredibly reliable in tracking vehicles in congested scenarios. While the model occasionally struggles with pedestrians and bikes (both bicycles and motorbikes) due to low image quality, it performs much better than the default COCO-trained model in detecting bikes. 
+        </p>    
+            <p>I am still refining the dataset to further improve its accuracy. I also plan to explore extracting traffic metrics from these video footages, such as turning movements, vehicle speeds, delay, saturation flow etc. </p>        
+
+        
+    </article>
+</section>
+
+<!-- Footer -->
+<footer id="footer">
+    <div class="inner">
+        <ul class="icons">
+            <li>&copy; Ishayet</li>
+        </ul>
+    </div>
+</footer>
+    <script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.poptrox.min.js"></script>
+	<script src="assets/js/browser.min.js"></script>
+	<script src="assets/js/breakpoints.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
+</body>
+</html>  
