@@ -16,9 +16,9 @@
     <section id="main">
         <article>
             <h2><b>Microsimulation of Gulshan 2 intersection with VISSIM</b></h2>
-            <p><i>A study of the Gulshan 2 intersection located in Gulshan, Dhaka. I made some changes to the intersection 
-            and compared it with the current operational layout by simulating them. This simulation was conducted on a 
-            student version of PTV VISSIM. </i></p>
+            <p><i>A study of the Gulshan 2 intersection located in Gulshan, Dhaka. I modified the intersection design 
+            and compared it to the existing layout through simulation.
+            This simulation was conducted on a student version of PTV VISSIM. </i></p>
          
             <div style= "display: flex; justify-content: center;">
             <video controls loop style="max-width: 90%;">
@@ -26,13 +26,14 @@
             Your browser does not support the video tag.
             </video>
         </div>
-        <figcaption> Simulation of the modified intersection</figcaption>
+        <figcaption> </figcaption>
+        </br>
         </br>
 
         <h2>Modeling the Existing Intersection</h2></br>
             
         <h3>Traffic Flow & Vehicle Composition</h3>
-            <p>The peak hour traffic flow and vehicle composition of a weekday was used in the simulation process.</p>
+            <p>Peak hour traffic flow of a weekday was used forr the simulation.</p>
             <img src="images/fulls/Gulshan 2 Vissim/Traffic flow.jpg" alt="Project Image 1" style="max-width: 56%; height: auto;"/>
             <img src="images/fulls/Gulshan 2 Vissim/Directional flow.jpg" alt="Project Image 1" style="max-width: 42%; height: auto; border: 1px solid rgb(204, 203, 203);"/>
         </br>        
@@ -50,12 +51,12 @@
                 </tr>
 
             </table>
-            <figcaption>Vehicle composition and directional flow of the traffic was sourced from the traffic survey initiated 
-            by ‘Bus Route Rationalization’ project on 23rd April 2024, Tuesday. </figcaption>
+            <figcaption>Vehicle composition and directional flow was sourced from the traffic survey initiated 
+            by ‘Bus Route Rationalization’ project on Tuesday, 23rd April 2024. </figcaption>
         </br>
 
         
-        <h3>Current Signal Timing</h3>    
+        <h3>Signal Timing</h3>    
             <p>Currently the intersection runs on a standard 4-phase signal system. The cycle 
             is about 280 seconds long. The green time allocation and the schematic diagram 
             of the traffic flow is given below:</p>
@@ -65,33 +66,33 @@
 
         
         <h3>Other Parameters</h3>
-            <p><span class="image left"><img src="images/fulls/Gulshan 2 Vissim/non-lane-based behavior.jpg" alt="" /></span><b>Non-Lane-Based Traffic: </b>The default driving behaviors in VISSIM strictly adheres to lane disciplines. But Dhaka’s traffic is nothing like that. Usually lane disciplines are not maintained. So, I adjusted the lateral movements to match the actual scenario. However, I do not have a proper way to validate this. So, the parameters were adjusted through trial and error, until the simulation appeared visually correct.</p>
-            <p><b>Conflict Areas:</b> Conflict Areas were assigned as needed. Certain intersections and roundabouts might demand priority rules, but for a simple 4 phase signalized intersection Conflict Areas were enonugh. </p>
+            <p><span class="image left"><img src="images/fulls/Gulshan 2 Vissim/non-lane-based behavior.jpg" alt="" /></span><b>Non-Lane-Based Traffic: </b>The default driving behaviors in VISSIM strictly maintains lane disciplines. But Dhaka’s traffic is chaotic. So, I adjusted the lateral movements to match the actual scenario. However, I couldn't find a proper way to measure the movements. I adjusted the parameters through trial and error until the simulation looked visually correct.</p>
+            <p><b>Conflict Areas:</b> Conflict Areas were assigned as needed. Certain intersections and roundabouts might demand priority rules, but for a simple 4 phase signalized intersection assigning the basic Conflict Areas were enonugh. </p>
             <p><b>Performance metrics: </b>Queue counters were placed for recording maximum queue length generated for each run. </p>
         </br></br></br>
         
         <h3>Geometrical limitations</h3>
             <p> This intersection used to be a roundabout, which was later converted into a signalized intersection. 
             The remainder of the roundabout works like a pseudo sliplane now. 
-            However, the traffic volume is quite high and as the legs get queued up, the left-turning vehicles cannot access it. 
-            This issue requires serious landuse reshaping so, I've decided not to modify the sliplane designs.</p>
+            When the traffic is high, the legs get queued up and the left-turning vehicles cannot access it anymore. 
+            Addressing this issue requires landscape reshaping, which probably will never happen, so I've decided not to modify the sliplanes.</p>
             <img src="images/fulls/Gulshan 2 Vissim/Queued slip lane.jpg" alt="Project Image 1" style="max-width: 100%; height: auto; border: 1px solid rgb(204, 203, 203);"/></br>
-            <figcaption> Remnants of a roundabout can still be seen in the intersection. Since the storage lengths are too short and lane disciplines are not maintained, the left turning lanes are blocked most of the time.</figcaption>
+            <figcaption> Remnants of a roundabout can still be seen in the intersection. Since the traffic is relatively high most of the time, storage lengths are too short and lane disciplines are not maintained, the left turning lanes are blocked most of the time.</figcaption>
         </br>
         
         <h2>Modifying the Intersection</h2>               
-            <p>I copied the first model and converted the intersection into an 8-phase Ring and Barrier design with dedicated right turning lanes (Oncoming traffic are on the right in Dhaka). 
-            It was made sure all parameters were the same for both models other than the signal timing and physical dissimilarities (right turn channelization).    
+            <p>I converted the intersection into an 8-phase Ring and Barrier design with dedicated right turning lanes (Oncoming traffic are on the right in Dhaka). 
+            It was made sure all parameters were the same for both models other than the signal timing and right turn channelization.    
             </p>
-            <p>This intersection experiences high traffic demands in some directions, while others having quite low. A Ring & Barrier design should provide more flexibility in green time allocation thus improving performance. Signal timing used for simulating the modified intersection is shown below.</p>         
+            <p>This intersection faces high traffic demand in some directions and comparatively low in others. A Ring & Barrier design should provide more flexibility in green time allocation thus improving performance. Signal timing used for simulating the modified intersection is shown below.</p>         
             <img src="images/fulls/Gulshan 2 Vissim/ring&Barrier2.jpg" alt="Project Image 1" style="max-width: 90%; display: flex; margin-left: auto; margin-right: auto;"/>    
             <img src="images/fulls/Gulshan 2 Vissim/8 Phase.jpg" alt="Project Image 1" style="max-width: 41%; height: auto; border: 1px solid rgb(204, 203, 203);"/>
             <img src="images/fulls/Gulshan 2 Vissim/Ring and Barrier.jpg" alt="Project Image 1" style="max-width: 57%; height: auto; border: 1px solid rgb(204, 203, 203);"/></br>
-            <figcaption>A Ring & Barrier signal system requires 8 individual phases. The opposing phases on the diagram do not conflict with each other(e.g., phase 1 & 5, phase 2 & 6). This flexibilty lets us adjust the phase timing as needed, which in turn results in better performance.</figcaption>
+            <figcaption>A Ring & Barrier signal system requires 8 individual phases. The opposing phases on the diagram do not conflict with each other (e.g., phase 1 & 5, phase 2 & 6). This flexibilty lets us adjust the phase timing as needed, which in turn results in better performance.</figcaption>
         </br>   
                       
         <h2>Performance Comparison</h2>
-            <p>Results were generated stochastically. 100 simulations were run for both models and the 90th percentile value of maximum queue length was recorded.</p>
+            <p>100 simulations were run for both models and the 90th percentile value of maximum queue length was recorded.</p>
             <table style="width: 100%; margin: auto;">
                 <tr>
                     <th>Approach</th>
@@ -127,18 +128,19 @@
         </br>
 
         <h2>Conclusion</h2>
-            <p>We can see that the approaches with the highest traffic volume (South leg and West leg) experience the most decrease in queue length. This is to be expected as having more phases gives more flexibility in adjusting green time for each direction while also reducing overall conflicts in traffic flow. However, the ring and barrier design increases the complexity of traffic operation. I designed this signal timing for the peak hour on a weekday. Realistically multiple timing schedules need to be assigned for the specific time of the day.</p>
+            <p>We can see that the approaches with the highest traffic volume (South leg and West leg) experience the largest decrease in queue length. This is to be expected as having more phases gives more flexibility in adjusting green time for each direction while also reducing overall conflicts in traffic flow. However, the ring and barrier design increases the complexity of traffic operation. I designed this signal timing for the peak hour on a weekday. Realistically multiple timings might be needed for the specific times of the day.</p>
         </br>
         
         <h2>Improvements in Simulation Model</h2>
-            <p>This study is far from being perfect. Apart from the somewhat drastic changes I assumed on the infrastructure/ layout (e.g., turning 3 outgoing and 3 incoming lanes into 2 outgoing, 2 incoming and 2 dedicated right turning lanes), there are other shortcomings.</p>
+            <p>This study is far from being perfect. Apart from the drastic changes I assumed on the layout (e.g., turning 3 outgoing and 3 incoming lanes into 2 outgoing, 2 incoming and 2 dedicated right turning lanes), there are other shortcomings.</p>
+            <p><b>Model Validation:</b> The model was not calibrated and validated against real world data. This is perhaps the biggest shortcoming of the simulation.</p>
+            <p><b>Collection of proper field data for comparison and evaluation: </b>More field data such as Saturation Flow, Travel time ands Vehicle Delay needs to be measured for the intersection and incorporated in the study.</p>
             <p><b>3600s limitation on the student version of the software: </b>A big restriction of the student version is the 3600s time limit. Ideally, I would’ve liked to run the model for a couple of minutes to build up the traffic, before recording results. But since I’m only getting 3600s, I did not bother dividing that to get a warmup phase. All performance metrics were collected for 0-3600s of the simulation.</p>
-            <p><b>Collection of proper field data for comparison and evaluation: </b>To improve the model performance field data such as Saturation Flow, Travel time, Vehicle Delay needs to be measured for the intersection and incorporated in the study.</p>
-        </br>
+            </br>
 
         <h2>Application of M.L. for Model Calibration</h2>
             <p>This is the part I am excited about the most.</p>
-            <p>Without proper calibration and validation, I cannot confirm how the results generated by my models will translate to real world scenarios. One such research that dives into the process of calibrating simulation models is <a href="https://www.researchgate.net/publication/266310289_Development_and_Evaluation_of_a_Procedure_for_the_Calibration_of_Simulation_Models"><i>“Development and Evaluation of a Procedure for the Calibration of Simulation Models”</i></a> by Prof. Brian Park and Hongtu Qi. They have used a machine learning technique, genetic algorithm to be specific, to calibrate and validate the model parameters so that their results match the real-world data. In future I would love to implement such Machine learning techniques into my own work.</p>
+            <p>Without proper calibration and validation, I cannot confirm how the results generated by my models will translate to real world scenarios. One early research that dives into the process of calibrating simulation models is <a href="https://www.researchgate.net/publication/266310289_Development_and_Evaluation_of_a_Procedure_for_the_Calibration_of_Simulation_Models"><i>“Development and Evaluation of a Procedure for the Calibration of Simulation Models”</i></a> by Prof. Brian Park and Hongtu Qi. They have used a machine learning technique, genetic algorithm to be specific, to calibrate and validate the model parameters so that their results match the real-world data. In future I would love to implement this technique into my own work.</p>
 
         
         
