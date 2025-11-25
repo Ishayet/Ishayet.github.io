@@ -2635,7 +2635,7 @@ input, select, textarea {
 	}
 /* Right-side background extension */
 
-	body::before {
+	header::after {
 		content: '';
 		background-color: #1f1815;
 		background-attachment: scroll,								scroll;
