@@ -2163,6 +2163,19 @@ input, select, textarea {
 				border-radius: 100%;
 				width: 100%;
 			}
+		
+
+
+		.image.home {
+			border: none;
+			display: inline-flex;
+			margin: 0 0 2em 0;
+			width: 25%;
+		}
+
+			.image.home img {
+				width: 100%;
+			}
 
 /* List */
 
@@ -2686,6 +2699,11 @@ input, select, textarea {
 		}
 
 		#header .image.avatar {
+			margin: 0 0 1em 0;
+			width: 5.5em;
+		}
+
+		#header .image.home {
 			margin: 0 0 1em 0;
 			width: 5.5em;
 		}
